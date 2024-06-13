@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="title">20sp</dimen>
+    <dimen name="icon">48sp</dimen>
+    <dimen name="icon_height">48sp</dimen>
+    <dimen name="icon_width">48sp</dimen>
+    <dimen name="icon_margin">10sp</dimen>
+    <dimen name="separator_height">2sp</dimen>
+    <dimen name="separator_margin">2sp</dimen>
+    <dimen name="activity_vertical_margin">10sp</dimen>
+</resources>

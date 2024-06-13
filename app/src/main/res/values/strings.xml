@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Shopping List</string>
+    <string name="activity_list_title">Shopping list</string>
+    <string name="activity_add_item_title">Shopping list add item</string>
+    <string name="activity_edit_item_title">Shopping list edit item</string>
+    <string name="add_item">New item</string>
 </resources>

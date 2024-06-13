@@ -1,24 +1,92 @@
 package uni.eduard.popa.shoppinglist;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
-import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class MainActivity extends AppCompatActivity {
+import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
+import java.util.List;
+public class MainActivity extends AppCompatActivity implements  RecyclerViewInterface {
+
+    LinearLayout layout;
+    Button btnNewItem;
+    RecyclerView listView;
+    List<ItemModel> items;
+    ItemAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        listView = findViewById(R.id.listView);
+        listView.setLayoutManager(new LinearLayoutManager(this));
+        items = new ArrayList<ItemModel>();
+        for(int i=0;i<50;i++){
+            ItemModel item = new ItemModel("Item name "+ i, "Item description "+ i);
+            items.add(item);
+        }
+        adapter = new ItemAdapter(this, items, this);
+        listView.setAdapter(adapter);
+        btnNewItem = findViewById(R.id.btnNewItem);
+
+
+        DeleteSwipeCallback deleteSwipeCallback = new DeleteSwipeCallback(this, ItemTouchHelper.LEFT, R.drawable.baseline_delete_24, 0xf) {
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+
+
+                final int position = viewHolder.getAdapterPosition();
+                ItemModel deletedItem =  items.get(position);
+                adapter.removeItem(position);
+                Snackbar snackbar = Snackbar.make(findViewById(R.id.main),"Item deleted", Snackbar.LENGTH_LONG)
+                        .setAction("UNDO", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                adapter.restoreItem(deletedItem, position);
+                            }
+                        });
+
+                snackbar.show();
+
+            }
+        };
+        ItemTouchHelper deleteHelper = new ItemTouchHelper(deleteSwipeCallback);
+        deleteHelper.attachToRecyclerView(listView);
+        EditSwipeCallback editSwipeCallback = new EditSwipeCallback(this, ItemTouchHelper.RIGHT, R.drawable.baseline_edit_24, 0) {
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+                int position = viewHolder.getAdapterPosition();
+                onItemEdit(position);
+            }
+        };
+        ItemTouchHelper editHelper = new ItemTouchHelper(editSwipeCallback);
+        editHelper.attachToRecyclerView(listView);
+    }
+
+    @Override
+    public void onItemEdit(int position) {
+        Intent intent = new Intent(this, EditItemActivity.class);
+        intent.putExtra("NAME", items.get(position).getName());
+        startActivity(intent);
+    }
+
+    @Override
+    public void onItemSelect(int position) {
+        items.get(position).setBought(! items.get(position).getBought());
+        adapter.notifyItemChanged(position);
+    }
+
+    public void onNewItem(View view) {
+        Intent intent = new Intent(this, AddItemActivity.class);
+        startActivity(intent);
     }
 }
