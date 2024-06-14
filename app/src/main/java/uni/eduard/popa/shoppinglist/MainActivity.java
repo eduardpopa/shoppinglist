@@ -1,6 +1,7 @@
 package uni.eduard.popa.shoppinglist;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements  RecyclerViewInte
         btnNewItem = findViewById(R.id.btnNewItem);
 
 
-        DeleteSwipeCallback deleteSwipeCallback = new DeleteSwipeCallback(this, ItemTouchHelper.LEFT, R.drawable.baseline_delete_24, 0xf) {
+        DeleteSwipeCallback deleteSwipeCallback = new DeleteSwipeCallback(this, ItemTouchHelper.LEFT, R.drawable.baseline_delete_24, getResources().getColor( R.color.red)) {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
 
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements  RecyclerViewInte
         };
         ItemTouchHelper deleteHelper = new ItemTouchHelper(deleteSwipeCallback);
         deleteHelper.attachToRecyclerView(listView);
-        EditSwipeCallback editSwipeCallback = new EditSwipeCallback(this, ItemTouchHelper.RIGHT, R.drawable.baseline_edit_24, 0) {
+        EditSwipeCallback editSwipeCallback = new EditSwipeCallback(this, ItemTouchHelper.RIGHT, R.drawable.baseline_edit_24, getResources().getColor(R.color.blue)) {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
                 int position = viewHolder.getAdapterPosition();
