@@ -1,6 +1,7 @@
 package uni.eduard.popa.shoppinglist;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.Menu;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 public class MainActivity extends AppCompatActivity implements  RecyclerViewInterface {
     public static final String INTENT_EXTRA_ITEM = "ITEM";
@@ -51,6 +53,10 @@ public class MainActivity extends AppCompatActivity implements  RecyclerViewInte
         deleteHelper.attachToRecyclerView(listView);
         ItemTouchHelper editHelper = getEditItemTouchHelper();
         editHelper.attachToRecyclerView(listView);
+
+
+        ItemTouchHelper touchHelper = getMoveItemTouchHelper();
+        touchHelper.attachToRecyclerView(listView);
     }
 
     @Override
@@ -68,6 +74,42 @@ public class MainActivity extends AppCompatActivity implements  RecyclerViewInte
         items.get(position).setBought(! items.get(position).getBought());
         adapter.sortItems();
     }
+
+    @Override
+    public void onRowMoved(int fromPosition, int toPosition) {
+        if(!items.get(fromPosition).getBought() && !items.get(toPosition).getBought()) {
+            if (fromPosition < toPosition) {
+                for (int i = fromPosition; i < toPosition; i++) {
+                    items.get(i).setOrder(i + 1);
+                    items.get(i + 1).setOrder(i);
+                    Collections.swap(items, i, i + 1);
+                }
+            } else {
+                for (int i = fromPosition; i > toPosition; i--) {
+                    items.get(i).setOrder(i - 1);
+                    items.get(i - 1).setOrder(i);
+                    Collections.swap(items, i, i - 1);
+                }
+            }
+            adapter.notifyItemMoved(fromPosition, toPosition);
+        }
+    }
+
+    @Override
+    public void onRowSelected(ItemViewHolder viewHolder) {
+        if(!items.get( viewHolder.getAdapterPosition()).getBought()) {
+            viewHolder.rowView.setBackgroundColor(getResources().getColor(R.color.grey));
+        }
+    }
+
+
+    @Override
+    public void onRowClear(ItemViewHolder viewHolder) {
+        if(!items.get( viewHolder.getAdapterPosition()).getBought()) {
+            viewHolder.rowView.setBackgroundColor(getResources().getColor(R.color.white));
+        }
+    }
+
 
     public void onNewItem(View view) {
         Intent intent = new Intent(this, AddItemActivity.class);
@@ -175,5 +217,8 @@ public class MainActivity extends AppCompatActivity implements  RecyclerViewInte
             }
         };
         return new ItemTouchHelper(deleteSwipeCallback);
+    }
+    private ItemTouchHelper getMoveItemTouchHelper(){         ;
+        return new ItemTouchHelper(new ItemMoveCallback(this));
     }
 }

@@ -10,11 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ItemViewHolder extends RecyclerView.ViewHolder {
 
+    View rowView;
     ImageView imageView;
     TextView nameView;
     TextView descriptionView;
     public ItemViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
         super(itemView);
+        rowView = itemView;
         imageView =itemView.findViewById(R.id.imageView);
         nameView = itemView.findViewById(R.id.nameView);
         descriptionView = itemView.findViewById(R.id.descriptionView);
@@ -31,19 +33,19 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
                                          }
                                      });
 
-        itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                                            @Override
-                                            public boolean onLongClick(View v) {
-                                                if (recyclerViewInterface != null) {
-                                                    int position = getAdapterPosition();
-                                                    if (position != RecyclerView.NO_POSITION) {
-                                                        recyclerViewInterface.onItemEdit(position);
-                                                        return true;
-                                                    }
-                                                }
-                                                return false;
-                                            }
-                                        });
+//        itemView.setOnLongClickListener(new View.OnLongClickListener() {
+//                                            @Override
+//                                            public boolean onLongClick(View v) {
+//                                                if (recyclerViewInterface != null) {
+//                                                    int position = getAdapterPosition();
+//                                                    if (position != RecyclerView.NO_POSITION) {
+//                                                        recyclerViewInterface.onItemEdit(position);
+//                                                        return true;
+//                                                    }
+//                                                }
+//                                                return false;
+//                                            }
+//                                        });
 
 
     }
