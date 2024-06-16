@@ -1,7 +1,15 @@
 <resources>
     <string name="app_name">Shopping List</string>
-    <string name="activity_list_title">Shopping list</string>
-    <string name="activity_add_item_title">Shopping list add item</string>
-    <string name="activity_edit_item_title">Shopping list edit item</string>
-    <string name="add_item">New item</string>
+    <string name="list_title">Shopping list</string>
+    <string name="add_item_title">Add new item</string>
+    <string name="edit_item_title">Edit item</string>
+    <string name="new_item">New item</string>
+    <string name="save">Save</string>
+    <string name="name">Title</string>
+    <string name="description">Description</string>
+    <string name="update">Update</string>
+    <string name="undo">UNDO</string>
+    <string name="item_deleted">Item was deleted.</string>
+    <string name="description_hints">Item extra information</string>
+    <string name="error_name_is_required">Name is required!</string>
 </resources>

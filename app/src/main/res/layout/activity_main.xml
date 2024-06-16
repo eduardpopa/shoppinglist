@@ -25,7 +25,7 @@
         android:layout_gravity="end"
         android:layout_weight="0"
         android:onClick="onNewItem"
-        android:text="@string/add_item" />
+        android:text="@string/new_item" />
 </LinearLayout>
 
 

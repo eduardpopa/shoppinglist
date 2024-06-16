@@ -1,6 +1,30 @@
 package uni.eduard.popa.shoppinglist;
 
-public class ItemModel {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class ItemModel implements Parcelable {
+    protected ItemModel(Parcel in) {
+        bought = in.readByte() != 0;
+        image = in.readInt();
+        name = in.readString();
+        description = in.readString();
+    }
+
+    public static final Creator<ItemModel> CREATOR = new Creator<ItemModel>() {
+        @Override
+        public ItemModel createFromParcel(Parcel in) {
+            return new ItemModel(in);
+        }
+
+        @Override
+        public ItemModel[] newArray(int size) {
+            return new ItemModel[size];
+        }
+    };
+
     public boolean getBought() {
         return bought;
     }
@@ -42,5 +66,18 @@ public class ItemModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeByte((byte) (bought ? 1 : 0));
+        dest.writeInt(image);
+        dest.writeString(name);
+        dest.writeString(description);
     }
 }
