@@ -41,7 +41,7 @@ public class AddItemActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        ItemModel item = new ItemModel(txtName.getText().toString(), txtDescription.getText().toString());
+        ItemModel item = new ItemModel(txtName.getText().toString(), txtDescription.getText().toString() );
         outState.putParcelable(STATE_ITEM_KEY, (Parcelable) item);
     }
 

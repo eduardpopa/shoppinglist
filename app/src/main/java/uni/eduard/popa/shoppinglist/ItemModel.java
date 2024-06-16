@@ -6,7 +6,17 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 public class ItemModel implements Parcelable {
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
+
+    private int order;
     protected ItemModel(Parcel in) {
+        order = in.readInt();
         bought = in.readByte() != 0;
         image = in.readInt();
         name = in.readString();
@@ -37,7 +47,8 @@ public class ItemModel implements Parcelable {
     public ItemModel( String name, String description) {
         this.name = name;
         this.description = description;
-        bought =false;
+        this.bought =false;
+        this.order =0;
     }
 
     public int getImage() {
@@ -75,6 +86,7 @@ public class ItemModel implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeInt(order);
         dest.writeByte((byte) (bought ? 1 : 0));
         dest.writeInt(image);
         dest.writeString(name);

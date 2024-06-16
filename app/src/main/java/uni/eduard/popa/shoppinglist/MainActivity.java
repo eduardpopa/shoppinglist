@@ -3,6 +3,9 @@ package uni.eduard.popa.shoppinglist;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -33,9 +36,10 @@ public class MainActivity extends AppCompatActivity implements  RecyclerViewInte
         setContentView(R.layout.activity_main);
         listView = findViewById(R.id.listView);
         listView.setLayoutManager(new LinearLayoutManager(this));
-        items = new ArrayList<ItemModel>();
-        for(int i=0;i<50;i++){
+        items = new ArrayList<>();
+        for(int i=0;i<5;i++){
             ItemModel item = new ItemModel("Item name "+ i, "Item description "+ i);
+            item.setOrder(i);
             items.add(item);
         }
         adapter = new ItemAdapter(this, items, this);
@@ -62,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements  RecyclerViewInte
     @Override
     public void onItemSelect(int position) {
         items.get(position).setBought(! items.get(position).getBought());
-        adapter.notifyItemChanged(position);
+        adapter.sortItems();
     }
 
     public void onNewItem(View view) {
@@ -72,31 +76,29 @@ public class MainActivity extends AppCompatActivity implements  RecyclerViewInte
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
-        switch (requestCode){
+        switch (requestCode) {
             case INTENT_ITEM_UPDATE_REQUEST:
                 if (resultCode == RESULT_OK) {
                     ItemData data = intent.getParcelableExtra(EditItemActivity.INTENT_REPLY);
                     if (data != null) {
                         items.set(data.getPosition(), data.getItem());
                         adapter.notifyItemChanged(data.getPosition());
-
                     }
-
                 }
                 break;
             case INTENT_ITEM_ADD_REQUEST:
                 if (resultCode == RESULT_OK) {
                     ItemData data = intent.getParcelableExtra(AddItemActivity.INTENT_REPLY);
                     if (data != null) {
-                        items.add(0, data.getItem());
-                        adapter.notifyItemInserted(0);
-                        listView.scrollToPosition(0);
+                        ItemModel item = data.getItem();
+                        item.setOrder(items.size());
+                        items.add(item);
+                        adapter.notifyItemInserted(items.size());
+                        listView.scrollToPosition(items.size()-1);
                     }
-
                 }
                 break;
         }
-
     }
 
     @Override
@@ -117,6 +119,28 @@ public class MainActivity extends AppCompatActivity implements  RecyclerViewInte
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_menu_reset) {
+            adapter.resetItems();
+            return true;
+        }
+            else if(item.getItemId() == R.id.action_menu_clear) {
+            items = new ArrayList<>();
+            adapter.setItems(items);
+            return true;
+        }
+        else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
     @NonNull
     private ItemTouchHelper getEditItemTouchHelper() {
         return new ItemTouchHelper(new EditSwipeCallback(this, ItemTouchHelper.RIGHT, R.drawable.baseline_edit_24, getResources().getColor(R.color.blue)) {

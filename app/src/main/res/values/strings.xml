@@ -12,4 +12,6 @@
     <string name="item_deleted">Item was deleted.</string>
     <string name="description_hints">Item extra information</string>
     <string name="error_name_is_required">Name is required!</string>
+    <string name="reset">Reset</string>
+    <string name="clear">Clear</string>
 </resources>

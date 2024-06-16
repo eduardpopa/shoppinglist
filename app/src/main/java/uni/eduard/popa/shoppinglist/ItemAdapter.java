@@ -9,11 +9,18 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
     Context context;
+
+    public void setItems(List<ItemModel> items) {
+        this.items = items;
+        notifyDataSetChanged();
+    }
+
     List<ItemModel> items;
     private final RecyclerViewInterface  recyclerViewInterface;
 
@@ -62,5 +69,28 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
     public List<ItemModel> getData() {
         return items;
+    }
+    
+    public void sortItems(){
+        Comparator<ItemModel> comparator = new Comparator<ItemModel>() {
+            @Override
+            public int compare(ItemModel o1, ItemModel o2) {
+                if(o1.getBought() && !o2.getBought()){
+                    return 1;
+                }else if(!o1.getBought() && o2.getBought()){
+                    return -1;
+                }else {
+                    return o1.getOrder()-o2.getOrder();
+                }
+            }
+        };
+        items.sort(comparator);
+        notifyDataSetChanged();
+    }
+    public void resetItems(){
+        for(ItemModel item :items){
+            item.setBought(false);
+        }
+        sortItems();
     }
 }
