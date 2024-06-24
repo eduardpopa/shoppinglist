@@ -1,7 +1,6 @@
 package uni.eduard.popa.shoppinglist;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,9 +74,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
         Comparator<ItemModel> comparator = new Comparator<ItemModel>() {
             @Override
             public int compare(ItemModel o1, ItemModel o2) {
-                if(o1.getBought() && !o2.getBought()){
+                if(o1.getChecked() && !o2.getChecked()){
                     return 1;
-                }else if(!o1.getBought() && o2.getBought()){
+                }else if(!o1.getChecked() && o2.getChecked()){
                     return -1;
                 }else {
                     return o1.getOrder()-o2.getOrder();
@@ -89,7 +88,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
     }
     public void resetItems(){
         for(ItemModel item :items){
-            item.setBought(false);
+            item.setChecked(false);
         }
         sortItems();
     }

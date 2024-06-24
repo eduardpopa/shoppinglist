@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class EditItemActivity extends AppCompatActivity {
-    public static final String INTENT_REPLY = "REPLY";
     public static final String STATE_ITEM_KEY = "STATE_ITEM_EDIT";
 
     ItemModel item;
@@ -23,10 +22,11 @@ public class EditItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_item);
-        ItemData data = getIntent().getParcelableExtra(MainActivity.INTENT_EXTRA_ITEM);
+        ItemModel data = getIntent().getParcelableExtra(MainActivity.INTENT_EXTRA_ITEM);
+        position = getIntent().getIntExtra(MainActivity.INTENT_EXTRA_POSITION, -1);
+
         if(data!=null) {
-           item = data.getItem();
-           position = data.getPosition();
+           item = data;
            txtName = findViewById(R.id.txtName);
            txtDescription = findViewById(R.id.txtDescription);
            txtName.setText(item.getName());
@@ -40,10 +40,8 @@ public class EditItemActivity extends AppCompatActivity {
             Intent intent = new Intent();
             item.setName(txtName.getText().toString());
             item.setDescription(txtDescription.getText().toString());
-            ItemData data = new ItemData();
-            data.setPosition(position);
-            data.setItem(item);
-            intent.putExtra(INTENT_REPLY, data);
+            intent.putExtra(MainActivity.INTENT_EXTRA_ITEM, item);
+            intent.putExtra(MainActivity.INTENT_EXTRA_POSITION, position);
             setResult(RESULT_OK, intent);
             finish();
         }

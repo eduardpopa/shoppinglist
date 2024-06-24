@@ -17,7 +17,7 @@ public class ItemModel implements Parcelable {
     private int order;
     protected ItemModel(Parcel in) {
         order = in.readInt();
-        bought = in.readByte() != 0;
+        checked = in.readByte() != 0;
         image = in.readInt();
         name = in.readString();
         description = in.readString();
@@ -35,24 +35,24 @@ public class ItemModel implements Parcelable {
         }
     };
 
-    public boolean getBought() {
-        return bought;
+    public boolean getChecked() {
+        return checked;
     }
 
-    public void setBought(boolean bought) {
-        this.bought = bought;
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 
-    private boolean bought;
+    private boolean checked;
     public ItemModel( String name, String description) {
         this.name = name;
         this.description = description;
-        this.bought =false;
+        this.checked =false;
         this.order =0;
     }
 
     public int getImage() {
-        return bought? R.drawable.grocery4 : R.drawable.grocery1;
+        return checked ? R.drawable.grocery4 : R.drawable.grocery1;
     }
 
     public void setImage(int image) {
@@ -87,7 +87,7 @@ public class ItemModel implements Parcelable {
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeInt(order);
-        dest.writeByte((byte) (bought ? 1 : 0));
+        dest.writeByte((byte) (checked ? 1 : 0));
         dest.writeInt(image);
         dest.writeString(name);
         dest.writeString(description);

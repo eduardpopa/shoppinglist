@@ -1,7 +1,6 @@
 package uni.eduard.popa.shoppinglist;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.Menu;
@@ -24,6 +23,7 @@ import java.util.Collections;
 import java.util.List;
 public class MainActivity extends AppCompatActivity implements  RecyclerViewInterface {
     public static final String INTENT_EXTRA_ITEM = "ITEM";
+    public static final String INTENT_EXTRA_POSITION = "POSITION";
     public static final int INTENT_ITEM_UPDATE_REQUEST = 1;
     public static final int INTENT_ITEM_ADD_REQUEST = 2;
     public static final String STATE_ITEMS_KEY = "STATE_ITEMS";
@@ -62,22 +62,21 @@ public class MainActivity extends AppCompatActivity implements  RecyclerViewInte
     @Override
     public void onItemEdit(int position) {
         Intent intent = new Intent(this, EditItemActivity.class);
-        ItemData data = new ItemData();
-        data.setPosition(position);
-        data.setItem(items.get(position));
-        intent.putExtra(INTENT_EXTRA_ITEM, data);
+        intent.putExtra(INTENT_EXTRA_POSITION, position);
+        intent.putExtra(INTENT_EXTRA_ITEM, items.get(position));
         startActivityForResult(intent, INTENT_ITEM_UPDATE_REQUEST);
     }
 
     @Override
     public void onItemSelect(int position) {
-        items.get(position).setBought(! items.get(position).getBought());
-        adapter.sortItems();
+        items.get(position).setChecked(! items.get(position).getChecked());
+        adapter.notifyItemChanged(position);
+//        adapter.sortItems();
     }
 
     @Override
     public void onRowMoved(int fromPosition, int toPosition) {
-        if(!items.get(fromPosition).getBought() && !items.get(toPosition).getBought()) {
+//        if(!items.get(fromPosition).getChecked() && !items.get(toPosition).getChecked()) {
             if (fromPosition < toPosition) {
                 for (int i = fromPosition; i < toPosition; i++) {
                     items.get(i).setOrder(i + 1);
@@ -92,12 +91,12 @@ public class MainActivity extends AppCompatActivity implements  RecyclerViewInte
                 }
             }
             adapter.notifyItemMoved(fromPosition, toPosition);
-        }
+//        }
     }
 
     @Override
     public void onRowSelected(ItemViewHolder viewHolder) {
-        if(!items.get( viewHolder.getAdapterPosition()).getBought()) {
+        if(!items.get( viewHolder.getAdapterPosition()).getChecked()) {
             viewHolder.rowView.setBackgroundColor(getResources().getColor(R.color.grey));
         }
     }
@@ -105,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements  RecyclerViewInte
 
     @Override
     public void onRowClear(ItemViewHolder viewHolder) {
-        if(!items.get( viewHolder.getAdapterPosition()).getBought()) {
+        if(!items.get( viewHolder.getAdapterPosition()).getChecked()) {
             viewHolder.rowView.setBackgroundColor(getResources().getColor(R.color.white));
         }
     }
@@ -121,20 +120,20 @@ public class MainActivity extends AppCompatActivity implements  RecyclerViewInte
         switch (requestCode) {
             case INTENT_ITEM_UPDATE_REQUEST:
                 if (resultCode == RESULT_OK) {
-                    ItemData data = intent.getParcelableExtra(EditItemActivity.INTENT_REPLY);
+                    int position = intent.getIntExtra(INTENT_EXTRA_POSITION, -1);
+                    ItemModel data = intent.getParcelableExtra(INTENT_EXTRA_ITEM);
                     if (data != null) {
-                        items.set(data.getPosition(), data.getItem());
-                        adapter.notifyItemChanged(data.getPosition());
+                        items.set(position, data);
+                        adapter.notifyItemChanged(position);
                     }
                 }
                 break;
             case INTENT_ITEM_ADD_REQUEST:
                 if (resultCode == RESULT_OK) {
-                    ItemData data = intent.getParcelableExtra(AddItemActivity.INTENT_REPLY);
+                    ItemModel data = intent.getParcelableExtra(INTENT_EXTRA_ITEM);
                     if (data != null) {
-                        ItemModel item = data.getItem();
-                        item.setOrder(items.size());
-                        items.add(item);
+                        data.setOrder(items.size());
+                        items.add(data);
                         adapter.notifyItemInserted(items.size());
                         listView.scrollToPosition(items.size()-1);
                     }
@@ -156,7 +155,8 @@ public class MainActivity extends AppCompatActivity implements  RecyclerViewInte
         List<ItemModel> savedItems =  savedInstanceState.getParcelableArrayList(STATE_ITEMS_KEY);
         if(savedItems!=null){
             items=savedItems;
-            adapter = new ItemAdapter(this, items, this);
+//            adapter = new ItemAdapter(this, items, this);
+            adapter.setItems(items);
             listView.setAdapter(adapter);
         }
     }

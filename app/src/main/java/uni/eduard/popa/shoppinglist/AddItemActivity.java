@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class AddItemActivity extends AppCompatActivity {
-    public static final String INTENT_REPLY = "REPLY";
     public static final String STATE_ITEM_KEY = "STATE_ITEM_ADD";
 
     EditText txtName;
@@ -30,10 +29,7 @@ public class AddItemActivity extends AppCompatActivity {
         }else {
             Intent intent = new Intent();
             ItemModel item = new ItemModel(txtName.getText().toString(), txtDescription.getText().toString());
-            ItemData data = new ItemData();
-            data.setPosition(0);
-            data.setItem(item);
-            intent.putExtra(INTENT_REPLY, data);
+            intent.putExtra(MainActivity.INTENT_EXTRA_ITEM, item);
             setResult(RESULT_OK, intent);
             finish();
         }
