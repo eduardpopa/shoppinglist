@@ -20,6 +20,9 @@
         android:layout_toEndOf="@+id/imageView"
         android:textColor="@color/black"
         android:textSize="@dimen/title"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:maxLines="1"
         >
     </TextView>
     <TextView
@@ -28,6 +31,9 @@
         android:id="@+id/descriptionView"
         android:layout_below="@+id/nameView"
         android:layout_toEndOf="@+id/imageView"
+        android:singleLine="true"
+        android:ellipsize="end" 
+        android:maxLines="1"
         >
     </TextView>
     <LinearLayout

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.AddItemActivity"
+    android:layout_margin="10dp"
     android:orientation="vertical">
     <TextView
         android:id="@+id/lblName"
@@ -13,13 +14,14 @@
         android:text="@string/name"
         android:labelFor="@id/txtName"
         />
+
     <EditText
         android:id="@+id/txtName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints=""
-        android:inputType="text">
-    </EditText>
+        android:inputType="text"
+        android:singleLine="true" />
     <TextView
         android:id="@+id/lblDescription"
         android:layout_width="match_parent"
@@ -27,13 +29,15 @@
         android:text="@string/description"
         android:labelFor="@id/txtDescription"
         />
+
     <EditText
-        android:inputType="text"
         android:id="@+id/txtDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints="">
-    </EditText>
+        android:autofillHints=""
+        android:inputType="textMultiLine"
+        android:gravity="top"
+        android:lines="5" />
     <Button
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"

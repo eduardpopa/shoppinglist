@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    >
     <TextView
         android:id="@+id/lblName"
         android:layout_width="match_parent"
@@ -10,13 +12,15 @@
         android:text="@string/name"
         android:labelFor="@id/txtName"
         />
+
     <EditText
         android:id="@+id/txtName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints=""
-        android:inputType="text">
-    </EditText>
+        android:inputType="text"
+        android:layout_margin="10dp"
+        android:singleLine="true" />
     <TextView
         android:id="@+id/lblDescription"
         android:layout_width="match_parent"
@@ -25,11 +29,12 @@
         android:labelFor="@id/txtDescription"
         />
     <EditText
-        android:inputType="text"
         android:id="@+id/txtDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints="">
+        android:inputType="textMultiLine"
+        android:gravity="top"
+        android:lines="5">
     </EditText>
     <Button
         android:id="@+id/btnUpdate"
