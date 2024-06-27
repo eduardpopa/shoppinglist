@@ -99,10 +99,9 @@ public class ListItemsActivity extends AppCompatActivity implements RecyclerView
         if (loader.getLoader(R.id.loader_select_item) == null) {
             loader.initLoader(R.id.loader_select_item, bundle, new SelectItemCallback(this, adapter));
         }else{
-            loader.restartLoader(R.id.loader_select_item, bundle, new SelectItemCallback(this, adapter)).forceLoad();
+            loader.restartLoader(R.id.loader_select_item, bundle, new SelectItemCallback(this, adapter));
         }
         loader.getLoader(R.id.loader_select_item).forceLoad();
-
     }
 
     @Override
@@ -154,7 +153,6 @@ public class ListItemsActivity extends AppCompatActivity implements RecyclerView
                         loader.restartLoader(R.id.loader_update_item, bundle, new UpdateItemCallback(this, adapter));
                     }
                     loader.getLoader(R.id.loader_update_item).forceLoad();
-
                 }
             }
         }
@@ -165,10 +163,10 @@ public class ListItemsActivity extends AppCompatActivity implements RecyclerView
                     item.setPosition(adapter.getData().size());
                     Bundle bundle = new Bundle();
                     bundle.putParcelable(KEY_ITEM, item);
-                    LoaderManager loader =  LoaderManager.getInstance(this);
+                    LoaderManager loader = LoaderManager.getInstance(this);
                     if (loader.getLoader(R.id.loader_add_item) == null) {
                         loader.initLoader(R.id.loader_add_item, bundle, new AddItemCallback(this, adapter));
-                    } else{
+                    } else {
                         loader.restartLoader(R.id.loader_add_item, bundle, new AddItemCallback(this, adapter));
                     }
                     loader.getLoader(R.id.loader_add_item).forceLoad();
@@ -191,14 +189,17 @@ public class ListItemsActivity extends AppCompatActivity implements RecyclerView
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_menu_reset) {
             Bundle bundle = new Bundle();
-            LoaderManager loader =  LoaderManager.getInstance(this);
+            LoaderManager loader = LoaderManager.getInstance(this);
             if (loader.getLoader(R.id.loader_reset_items) == null) {
                 loader.initLoader(R.id.loader_reset_items, bundle, new ResetItemsCallback(this, adapter));
-            }else{
+            } else {
                 loader.restartLoader(R.id.loader_reset_items, bundle, new ResetItemsCallback(this, adapter));
             }
             loader.getLoader(R.id.loader_reset_items).forceLoad();
 
+            return true;
+        }else if(item.getItemId() == R.id.action_menu_help){
+            startActivity(new Intent(this, HelpActivity.class));
             return true;
         } else {
             return super.onOptionsItemSelected(item);

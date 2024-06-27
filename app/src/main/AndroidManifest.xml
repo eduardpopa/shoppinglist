@@ -9,19 +9,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ShoppingList">
-
         <activity
             android:name=".activities.ListItemsActivity"
-            android:exported="true" android:label="@string/list_title">
+            android:exported="true"
+            android:label="@string/list_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="uni.eduard.popa.shoppinglist.activities.AddItemActivity" android:parentActivityName=".activities.ListItemsActivity" android:label="@string/add_item_title">
-        </activity>
-        <activity android:name="uni.eduard.popa.shoppinglist.activities.EditItemActivity"  android:parentActivityName=".activities.ListItemsActivity" android:label="@string/edit_item_title">
-        </activity>
+        <activity
+            android:name=".activities.AddItemActivity"
+            android:label="@string/add_item_title"
+            android:parentActivityName=".activities.ListItemsActivity" />
+        <activity
+            android:name=".activities.EditItemActivity"
+            android:label="@string/edit_item_title"
+            android:parentActivityName=".activities.ListItemsActivity" />
+        <activity
+            android:name=".activities.HelpActivity"
+            android:label="@string/help_title"
+            android:parentActivityName=".activities.ListItemsActivity"
+            />
     </application>
 
 </manifest>

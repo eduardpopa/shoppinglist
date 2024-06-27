@@ -19,4 +19,6 @@
     <string name="task_item_added">Item was added.</string>
     <string name="task_item_deleted">Item was deleted.</string>
     <string name="task_item_updated">Item was updated.</string>
+    <string name="help">Help</string>
+    <string name="help_title">Help</string>
 </resources>
