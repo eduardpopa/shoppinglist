@@ -21,4 +21,17 @@
     <string name="task_item_updated">Item was updated.</string>
     <string name="help">Help</string>
     <string name="help_title">Help</string>
+    <string name="help_page_title">Help page title</string>
+    <string name="help_select_title">Short PRESS</string>
+    <string name="help_select_description">Short PRESS to toggle item.</string>
+    <string name="help_edit_title">Swipe RIGHT</string>
+    <string name="help_edit_description">Swipe RIGHT to edit an item.</string>
+    <string name="help_delete_title">Swipe LEFT</string>
+    <string name="help_delete_description">Swipe LEFT to delete the item.</string>
+    <string name="help_drag_title"><![CDATA[Long PRESS & DRAG]]></string>
+    <string name="help_drag_description">Long PRESS and DRAG to reorder items.</string>
+    <string name="help_newitem_title">Press \"New Item\"</string>
+    <string name="help_newitem_description">Press the button to create new item.</string>
+    <string name="help_reset_title">Press Menu > Press \"Reset\"</string>
+    <string name="help_reset_description">Press button to un-select all items</string>
 </resources>

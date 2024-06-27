@@ -1,17 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.HelpActivity"
     android:orientation="vertical">
-    <TextView
-        android:id="@+id/lblName"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/name"
-        android:labelFor="@id/txtName"
-        />
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/item_layout_padding">
+
+                <ImageView
+                    android:id="@+id/imageView0"
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="@dimen/icon_height"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/icon_margin"
+                    app:srcCompat="@drawable/baseline_edit_attributes_24"
+                    />
+
+                <TextView
+                    android:id="@+id/nameView0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/imageView0"
+                    android:text="@string/help_newitem_title"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title" />
+
+                <TextView
+                    android:id="@+id/descriptionView0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/nameView0"
+                    android:layout_toEndOf="@+id/imageView0"
+                    android:text="@string/help_newitem_description" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/item_layout_padding">
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="@dimen/icon_height"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/icon_margin"
+                    app:srcCompat="@drawable/baseline_touch_app_24"
+                    />
+
+                <TextView
+                    android:id="@+id/nameView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/imageView1"
+                    android:text="@string/help_select_title"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title" />
+
+                <TextView
+                    android:id="@+id/descriptionView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/nameView1"
+                    android:layout_toEndOf="@+id/imageView1"
+                    android:text="@string/help_select_description" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/item_layout_padding">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="@dimen/icon_height"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/icon_margin"
+                    app:srcCompat="@drawable/baseline_swipe_right_24" />
+
+                <TextView
+                    android:id="@+id/nameView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/imageView2"
+                    android:text="@string/help_edit_title"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title" />
+
+                <TextView
+                    android:id="@+id/descriptionView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/nameView2"
+                    android:layout_toEndOf="@+id/imageView2"
+                    android:text="@string/help_edit_description" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/item_layout_padding">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="@dimen/icon_height"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/icon_margin"
+                    app:srcCompat="@drawable/baseline_swipe_left_24" />
+
+                <TextView
+                    android:id="@+id/nameView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/imageView3"
+                    android:text="@string/help_delete_title"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title" />
+
+                <TextView
+                    android:id="@+id/descriptionView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/nameView3"
+                    android:layout_toEndOf="@+id/imageView3"
+                    android:text="@string/help_delete_description" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/item_layout_padding">
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="@dimen/icon_height"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/icon_margin"
+                    app:srcCompat="@drawable/baseline_swipe_vertical_24" />
+
+                <TextView
+                    android:id="@+id/nameView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/imageView4"
+                    android:text="@string/help_drag_title"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title" />
+
+                <TextView
+                    android:id="@+id/descriptionView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/nameView4"
+                    android:layout_toEndOf="@+id/imageView4"
+                    android:text="@string/help_drag_description" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/item_layout_padding">
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="@dimen/icon_height"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/icon_margin"
+                    app:srcCompat="@drawable/baseline_more_vert_24" />
+
+                <TextView
+                    android:id="@+id/nameView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/imageView5"
+                    android:text="@string/help_reset_title"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title" />
+
+                <TextView
+                    android:id="@+id/descriptionView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/nameView5"
+                    android:layout_toEndOf="@+id/imageView5"
+                    android:text="@string/help_reset_description" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

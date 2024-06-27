@@ -42,7 +42,7 @@ public class ListItemsAdapter extends RecyclerView.Adapter<ItemViewHolder> {
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         holder.imageView.setImageResource(items.get(position).getImage());
         holder.nameView.setText(items.get(position).getName() );
-        holder.descriptionView.setText(items.get(position).getDescription() +" ID:"+items.get(position).getId() +" POS:"+items.get(position).getPosition());
+        holder.descriptionView.setText(items.get(position).getDescription() );
     }
 
     @Override

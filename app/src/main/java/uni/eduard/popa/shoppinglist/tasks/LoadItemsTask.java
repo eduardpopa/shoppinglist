@@ -18,6 +18,16 @@ public class LoadItemsTask extends AsyncTaskLoader<List<ItemModel>> {
         @Nullable
         @Override
         public List<ItemModel> loadInBackground() {
-                return ShoppingListDatabase.getDatabase(getContext()).itemModel().loadAll();
+                List<ItemModel> items = ShoppingListDatabase.getDatabase(getContext()).itemModel().loadAll();
+                if (items.size() <= 0) {
+                        ShoppingListDatabase.getDatabase(getContext()).itemModel().insert(new ItemModel("Cucumbers", "2kg BIO"));
+                        ShoppingListDatabase.getDatabase(getContext()).itemModel().insert(new ItemModel("Mushrooms", "0.5kg Psilocybin"));
+                        ShoppingListDatabase.getDatabase(getContext()).itemModel().insert(new ItemModel("Onions", "make JN cries"));
+                        ShoppingListDatabase.getDatabase(getContext()).itemModel().insert(new ItemModel("Peppers", "3R 3Y 3G"));
+                        ShoppingListDatabase.getDatabase(getContext()).itemModel().insert(new ItemModel("Potatoes", "from india"));
+                        ShoppingListDatabase.getDatabase(getContext()).itemModel().insert(new ItemModel("Spinach", "green one"));
+                        return ShoppingListDatabase.getDatabase(getContext()).itemModel().loadAll();
+                }
+                return items;
         }
 }
