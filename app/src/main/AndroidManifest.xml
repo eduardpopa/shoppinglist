@@ -11,16 +11,16 @@
         android:theme="@style/Theme.ShoppingList">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.ListItemsActivity"
             android:exported="true" android:label="@string/list_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="uni.eduard.popa.shoppinglist.AddItemActivity" android:parentActivityName=".MainActivity" android:label="@string/add_item_title">
+        <activity android:name="uni.eduard.popa.shoppinglist.activities.AddItemActivity" android:parentActivityName=".activities.ListItemsActivity" android:label="@string/add_item_title">
         </activity>
-        <activity android:name="uni.eduard.popa.shoppinglist.EditItemActivity"  android:parentActivityName=".MainActivity" android:label="@string/edit_item_title">
+        <activity android:name="uni.eduard.popa.shoppinglist.activities.EditItemActivity"  android:parentActivityName=".activities.ListItemsActivity" android:label="@string/edit_item_title">
         </activity>
     </application>
 

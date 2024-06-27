@@ -1,8 +1,11 @@
-package uni.eduard.popa.shoppinglist;
+package uni.eduard.popa.shoppinglist.callbacks;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
+
+import uni.eduard.popa.shoppinglist.activities.ItemViewHolder;
+import uni.eduard.popa.shoppinglist.activities.RecyclerViewInterface;
 
 public class ItemMoveCallback extends ItemTouchHelper.Callback {
 

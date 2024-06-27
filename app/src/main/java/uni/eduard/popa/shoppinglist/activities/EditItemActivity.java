@@ -1,4 +1,4 @@
-package uni.eduard.popa.shoppinglist;
+package uni.eduard.popa.shoppinglist.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import uni.eduard.popa.shoppinglist.models.ItemModel;
+import uni.eduard.popa.shoppinglist.R;
 
 
 public class EditItemActivity extends AppCompatActivity {
@@ -22,8 +25,8 @@ public class EditItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_item);
-        ItemModel data = getIntent().getParcelableExtra(MainActivity.INTENT_EXTRA_ITEM);
-        position = getIntent().getIntExtra(MainActivity.INTENT_EXTRA_POSITION, -1);
+        ItemModel data = getIntent().getParcelableExtra(ListItemsActivity.KEY_ITEM);
+        position = getIntent().getIntExtra(ListItemsActivity.KEY_POSITION, -1);
 
         if(data!=null) {
            item = data;
@@ -40,8 +43,8 @@ public class EditItemActivity extends AppCompatActivity {
             Intent intent = new Intent();
             item.setName(txtName.getText().toString());
             item.setDescription(txtDescription.getText().toString());
-            intent.putExtra(MainActivity.INTENT_EXTRA_ITEM, item);
-            intent.putExtra(MainActivity.INTENT_EXTRA_POSITION, position);
+            intent.putExtra(ListItemsActivity.KEY_ITEM, item);
+            intent.putExtra(ListItemsActivity.KEY_POSITION, position);
             setResult(RESULT_OK, intent);
             finish();
         }

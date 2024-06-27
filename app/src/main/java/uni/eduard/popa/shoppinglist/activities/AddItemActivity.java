@@ -1,4 +1,4 @@
-package uni.eduard.popa.shoppinglist;
+package uni.eduard.popa.shoppinglist.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,10 +10,14 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import uni.eduard.popa.shoppinglist.models.ItemModel;
+import uni.eduard.popa.shoppinglist.R;
 
-public class AddItemActivity extends AppCompatActivity {
+
+public class AddItemActivity extends AppCompatActivity  {
     public static final String STATE_ITEM_KEY = "STATE_ITEM_ADD";
 
+    ItemModel item;
     EditText txtName;
     EditText txtDescription;
     @Override
@@ -22,14 +26,16 @@ public class AddItemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_item);
         txtName = findViewById(R.id.txtName);
         txtDescription = findViewById(R.id.txtDescription);
+
     }
     public void onSave(View view) {
         if( TextUtils.isEmpty(txtName.getText())){
             txtName.setError( getResources().getText(R.string.error_name_is_required));
         }else {
             Intent intent = new Intent();
-            ItemModel item = new ItemModel(txtName.getText().toString(), txtDescription.getText().toString());
-            intent.putExtra(MainActivity.INTENT_EXTRA_ITEM, item);
+            item = new ItemModel(txtName.getText().toString(), txtDescription.getText().toString());
+
+            intent.putExtra(ListItemsActivity.KEY_ITEM, item);
             setResult(RESULT_OK, intent);
             finish();
         }

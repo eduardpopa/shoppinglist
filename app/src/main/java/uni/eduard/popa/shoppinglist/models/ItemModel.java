@@ -1,22 +1,40 @@
-package uni.eduard.popa.shoppinglist;
+package uni.eduard.popa.shoppinglist.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import uni.eduard.popa.shoppinglist.R;
+
+
+@Entity
 public class ItemModel implements Parcelable {
-    public int getOrder() {
-        return order;
+
+
+    public long getId() {
+        return id;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    private int order;
+    @PrimaryKey(autoGenerate = true)
+    private long id;
+    private int position;
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int order) {
+        this.position = order;
+    }
+
     protected ItemModel(Parcel in) {
-        order = in.readInt();
+        id = in.readLong();
+        position = in.readInt();
         checked = in.readByte() != 0;
         image = in.readInt();
         name = in.readString();
@@ -48,7 +66,7 @@ public class ItemModel implements Parcelable {
         this.name = name;
         this.description = description;
         this.checked =false;
-        this.order =0;
+        this.position =0;
     }
 
     public int getImage() {
@@ -85,8 +103,9 @@ public class ItemModel implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeInt(order);
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeInt(position);
         dest.writeByte((byte) (checked ? 1 : 0));
         dest.writeInt(image);
         dest.writeString(name);

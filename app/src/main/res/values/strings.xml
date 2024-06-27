@@ -14,4 +14,9 @@
     <string name="error_name_is_required">Name is required!</string>
     <string name="reset">Reset</string>
     <string name="clear">Clear</string>
+    <string name="item_saved">Item was saved.</string>
+    <string name="task_items_loaded">...</string>
+    <string name="task_item_added">Item was added.</string>
+    <string name="task_item_deleted">Item was deleted.</string>
+    <string name="task_item_updated">Item was updated.</string>
 </resources>

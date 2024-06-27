@@ -1,4 +1,4 @@
-package uni.eduard.popa.shoppinglist;
+package uni.eduard.popa.shoppinglist.callbacks;
 
 
 import android.content.Context;

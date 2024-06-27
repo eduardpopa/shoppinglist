@@ -1,17 +1,25 @@
-package uni.eduard.popa.shoppinglist;
+package uni.eduard.popa.shoppinglist.activities;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.loader.app.LoaderManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
+import uni.eduard.popa.shoppinglist.R;
+import uni.eduard.popa.shoppinglist.callbacks.UpdateItemCallback;
+import uni.eduard.popa.shoppinglist.models.ItemModel;
+
+public class ListItemsAdapter extends RecyclerView.Adapter<ItemViewHolder> {
 
     Context context;
 
@@ -23,9 +31,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
     List<ItemModel> items;
     private final RecyclerViewInterface  recyclerViewInterface;
 
-    public ItemAdapter(Context context, List<ItemModel> items, RecyclerViewInterface recyclerViewInterface) {
+    public ListItemsAdapter(Context context, RecyclerViewInterface recyclerViewInterface) {
         this.context = context;
-        this.items = items;
+        this.items = new ArrayList<>();
         this.recyclerViewInterface = recyclerViewInterface;
     }
 
@@ -48,8 +56,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         holder.imageView.setImageResource(items.get(position).getImage());
-        holder.nameView.setText(items.get(position).getName());
-        holder.descriptionView.setText(items.get(position).getDescription());
+        holder.nameView.setText(items.get(position).getName() );
+        holder.descriptionView.setText(items.get(position).getDescription() +" ID:"+items.get(position).getId() +" POS:"+items.get(position).getPosition());
     }
 
     @Override
@@ -60,9 +68,16 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
         items.remove(position);
         notifyItemRemoved(position);
     }
-
+    public void addItem(ItemModel item) {
+        items.add(item);
+        notifyItemInserted(items.size()-1);
+    }
     public void restoreItem(ItemModel item, int position) {
         items.add(position, item);
+        notifyItemInserted(position);
+    }
+    public void updateItem(ItemModel item, int position) {
+        items.set(position, item);
         notifyItemInserted(position);
     }
 
@@ -79,7 +94,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
                 }else if(!o1.getChecked() && o2.getChecked()){
                     return -1;
                 }else {
-                    return o1.getOrder()-o2.getOrder();
+                    return o1.getPosition()-o2.getPosition();
                 }
             }
         };
@@ -91,5 +106,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
             item.setChecked(false);
         }
         sortItems();
+    }
+
+    public void swapItems(int fromPosition, int toPosition){
+        Collections.swap(items, fromPosition, toPosition);
+        notifyItemMoved(fromPosition, toPosition);
     }
 }

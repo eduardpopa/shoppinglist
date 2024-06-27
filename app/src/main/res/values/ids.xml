@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="intent_add_request" type="id" />
+    <item name="intent_update_request" type="id"/>
+    <item name="loader_list_items" type="id"/>
+    <item name="loader_add_item" type="id"/>
+    <item name="loader_update_item" type="id"/>
+    <item name="loader_delete_item" type="id"/>
+    <item name="loader_select_item" type="id" />
+    <item name="loader_swap_items" type="id" />
+    <item name="loader_reset_items" type="id" />
+</resources>
